@@ -1,0 +1,47 @@
+forms:
+    quick:
+        name: Quick Enquiry                                                     # [REQUIRED]
+        autoresponder: true                                                     # [Optional] Autoresponse is on by default, this option is not functional yet, it will be in a future release.
+        recipient: mail@example.com                                             # [REQUIRED]
+        subject: New Message From Your Website                                  # [REQUIRED]
+        success_message: Thanks! Your message has been sent.                    # [Optional] Custom success message.
+        fields:
+            name:                                                               # [REQUIRED] Lowercase, letters, numbers and _ only. Name/ID of the field
+                label: Name                                                     # [REQUIRED] Human-friendly label
+                type: text                                                      # [REQUIRED] HTML field type
+                placeholder: Name                                               # [Optional] HTML Placeholder
+                validate: required|alpha_numeric                                # [Optional] Validation rules, see https://github.com/Wixel/GUMP#available-validators
+                filter: trim|sanitize_string                                    # [Optional] Filter rules, see https://github.com/Wixel/GUMP#available-filters
+            email:
+                label: E-mail address
+                type: email
+                placeholder: E-mail address
+                validate: required|valid_email
+                filter: trim
+            phone:
+                label: Phone number
+                type: tel
+                placeholder: Phone number
+                validate: required|numeric|min_len,10|max_len,13
+                filter: trim|sanitize_numbers
+            subject:
+                label: Subject
+                type: select
+                placeholder: Choose an option
+                validate: required|alpha_numeric
+                filter: trim|sanitize_string
+                options:                                                        # [REQUIRED for Select] List of options for select field
+                    -                                                           # Indented - signifies a new option.
+                        value: value                                            # Option value
+                        label: Option                                           # Option label
+                    -
+                        value: value2
+                        label: Another Option
+            message:
+                label: Message
+                type: textarea
+                placeholder: Enter your message
+                filter: trim|sanitize_string
+            callback:                                                           # At minimum, a field needs a label and a type.
+                label: Call me back
+                type: checkbox
