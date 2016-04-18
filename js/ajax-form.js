@@ -50,6 +50,8 @@ $(document).on('submit', '.cf-form form', function (e) {
              * the response to the console.
              */
 
+            console.log(response);
+
             // Positive response
             if ( response.code == 200 ) {
                 $(formID)[0].reset();
@@ -81,6 +83,8 @@ $(document).on('submit', '.cf-form form', function (e) {
              * console.log(response);
              * $('body').prepend('<pre>'+ JSON.stringify(response) +'</pre>');
              */
+
+            console.log(response);
 
             // Response template
             var template = '<div class="cf-alert error">There was an error submitting the form. Please make sure you submit all required fields.</div>';

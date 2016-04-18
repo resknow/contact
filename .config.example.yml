@@ -5,6 +5,7 @@ forms:
         recipient: mail@example.com                                             # [REQUIRED]
         subject: New Message From Your Website                                  # [REQUIRED]
         success_message: Thanks! Your message has been sent.                    # [Optional] Custom success message.
+        logo: http://assets.resknow.co.uk/branding/resknow/logo-278x80.png      # [Optional] Logo image to show at the top of the e-mail
         fields:
             name:                                                               # [REQUIRED] Lowercase, letters, numbers and _ only. Name/ID of the field
                 label: Name                                                     # [REQUIRED] Human-friendly label

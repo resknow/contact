@@ -7,12 +7,11 @@
 /**
  * Get Form
  *
- * @global $_config
  * @var $id: ID of the form
  * @return HTML form
  */
 function get_form( $id ) {
-    global $_config;
+    $_config = get('site');
 
     $the_form = $_config['forms'][$id];
 
@@ -38,7 +37,7 @@ function get_form( $id ) {
 }
 
 function get_field_html( $form, $field ) {
-    global $_config;
+    $_config = get('site');
 
     # The Field
     $the_field = $_config['forms'][$form]['fields'][$field];
@@ -60,21 +59,21 @@ function get_field_html( $form, $field ) {
         case $the_field['type'] == 'checkbox':
         case $the_field['type'] == 'radio':
             return '<label><input name="' . $field . '" type="'. $the_field['type'] .'">'. $the_field['label'] .'</label>';
-        break;
+            break;
 
         # Select
         case $the_field['type'] == 'select':
             return '<select name="' . $field . '">' . get_select_options($the_field) . '</select>';
-        break;
+            break;
 
         # Textarea
         case $the_field['type'] == 'textarea':
             return '<textarea name="' . $field . '" placeholder="' . $the_field['placeholder'] . '"></textarea>';
-        break;
+            break;
 
         default:
             return '<input name="' . $field . '" type="'. $the_field['type'] .'" placeholder="' . $the_field['placeholder'] . '">';
-        break;
+            break;
 
     }
 }
