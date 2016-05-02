@@ -2,7 +2,7 @@
 
 ### v2.0.0
 
-__Important:__ Boilerplate version `2.0.0` or higher is required for the plugin to work as it uses new features. _Check your version before updating!_
+__Important:__ Boilerplate version `2.0.0-dev` or higher is required for the plugin to work as it uses new features. _Check your version before updating!_
 
 - Triggers changed to Events.
 - Filters use apply_filters() function.
