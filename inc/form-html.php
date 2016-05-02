@@ -7,10 +7,11 @@
 /**
  * Get Form
  *
- * @var $id: ID of the form
+ * @param $id (string) ID of the form
+ * @param $output (bool) Whether to output to screen
  * @return HTML form
  */
-function get_form( $id ) {
+function get_form( $id, $output = true ) {
     $_config = get('site');
 
     $the_form = $_config['forms'][$id];
@@ -33,7 +34,12 @@ function get_form( $id ) {
 </form>
 </div>';
 
-    return $output;
+    if ( $output === true ) {
+        return $output;
+    }
+
+    echo $output;
+    
 }
 
 function get_field_html( $form, $field ) {

@@ -1,16 +1,14 @@
 <?php
 
-use BP\Filters;
-
 /**
  * @subpackage Contact
- * @version 1.1.0
- * @package Boilerplate
+ * @version 2.0.0
+ * @package Boilerplate II
  * @author Chris Galbraith
  */
 
 # Set Minimum Boilerplate Version
-plugin_requires_version('contact', '1.5.6');
+plugin_requires_version('contact', '2.0.0');
 
 # Check for GUMP
 if ( !class_exists('GUMP') ) {
@@ -25,11 +23,11 @@ if ( !class_exists('PHPMailer') ) {
 # Filter Forms before running the test
 # below in case a plugin wants to
 # auto-generate a form
-set('site.forms', Filters::apply('contact_forms', get('site.forms')));
+set('site.forms', apply_filters('contact/forms', get('site.forms')));
 
 # Load Forms
-if ( get('site.forms') === false ) {
-    throw new Exception('Contact Plugin: Unable to load form config. Check your config file. <em>Copy the example config from the <code>_plugins/contact</code> directory to your <code>.config.yml</code> file.</em>');
+if ( ! get('site.forms') ) {
+    throw new Exception('Contact Plugin: Unable to load form config. Check your config file. <em>Copy the example config from the <code>includes/plugins/contact</code> directory to your <code>.config.yml</code> file.</em>');
 }
 
 # Load Functions
@@ -40,11 +38,18 @@ require_once __DIR__ . '/inc/form-html.php';
 # Minified versions are used for sites in
 # any state other than development.
 if ( get('site.environment') == 'dev' ) {
-    add_script( 'contact-js', '/_plugins/contact/js/ajax-form.js' );
-    add_stylesheet( 'contact-css', '/_plugins/contact/css/ajax-form.css' );
+
+    // Look for jQuery
+    $assets = get_scripts();
+    if (!isset($assets['jquery'])) {
+        add_script( 'jquery', get_package('script', 'jquery') );
+    }
+
+    add_script( 'contact-js', '/includes/plugins/contact/js/ajax-form.js' );
+    add_stylesheet( 'contact-css', '/includes/plugins/contact/css/ajax-form.css' );
 } else {
-    add_script( 'contact-js', '/_plugins/contact/js/ajax-form.min.js' );
-    add_stylesheet( 'contact-css', '/_plugins/contact/css/ajax-form.min.css' );
+    add_script( 'contact-js', '/includes/plugins/contact/js/ajax-form.min.js' );
+    add_stylesheet( 'contact-css', '/includes/plugins/contact/css/ajax-form.min.css' );
 }
 
 # Get Forms
@@ -72,7 +77,7 @@ if ( in_array(get('page.path'), $_contact_post) ) {
     # - email-auto-responder.php
     # - email-message.php
     # - submit.php (Placeholder to avoid errors)
-    use_theme(Filters::apply('contact_templates', __DIR__ . '/templates'));
+    use_theme(apply_filters('contact/templates', __DIR__ . '/templates'));
 
     # Check for POST data
     if ( is_form_data() ) {
@@ -88,7 +93,7 @@ if ( in_array(get('page.path'), $_contact_post) ) {
 
         # See if success message is set
         if ( !isset($_current_form['success_message']) ) {
-            $_current_form['success_message'] = Filters::apply('contact_default_message', 'Thanks! Your message has been sent.');
+            $_current_form['success_message'] = apply_filters('contact_default_message', 'Thanks! Your message has been sent.');
         }
 
         # Set logo
@@ -129,7 +134,7 @@ if ( in_array(get('page.path'), $_contact_post) ) {
             $_contact_json = array(
                 'code'      => 100,
                 'type'      => 'negative',
-                'message'   => Filters::apply('contact_on_fail', $gump->get_readable_errors(true))
+                'message'   => apply_filters('contact_on_fail', $gump->get_readable_errors(true))
             );
 
         } else {

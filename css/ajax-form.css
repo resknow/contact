@@ -3,6 +3,7 @@
     background-color: #eee;
     color: #555;
     padding: 12px;
+    margin-bottom: 12px;
 }
 
 .cf-alert.positive {
@@ -18,4 +19,9 @@
 .cf-alert.warning {
     background-color: #f7f5d8;
     color: #d1c90d;
+}
+
+.cf-alert .gump-error-message {
+    display: block;
+    line-height: 1.5;
 }
