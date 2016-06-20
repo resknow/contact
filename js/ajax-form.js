@@ -54,6 +54,10 @@ $(document).on('submit', '.cf-form form', function (e) {
 
             // Positive response
             if ( response.code == 200 ) {
+
+                // Event: contact.success
+                $(document).trigger('contact.success', [response]);
+
                 $(formID)[0].reset();
 
                 if (formPush && formPush !== 'this') {
@@ -63,6 +67,9 @@ $(document).on('submit', '.cf-form form', function (e) {
                         window.location.reload();
                     }, 1000);
                 }
+            } else {
+                // Event: contact.fail
+                $(document).trigger('contact.fail', [response]);
             }
 
             // Response template
@@ -83,6 +90,9 @@ $(document).on('submit', '.cf-form form', function (e) {
              * console.log(response);
              * $('body').prepend('<pre>'+ JSON.stringify(response) +'</pre>');
              */
+
+            // Event: contact.error
+            $(document).trigger('contact.error', [response]);
 
             console.log(response);
 

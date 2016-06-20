@@ -1,5 +1,9 @@
 # Contact Form Plugin
 
+### v1.2.0
+
+- Added AJAX form event callbacks, you can now hook in to the contact form on the frontend with the following events: `contact.success`, `contact.fail` and `contact.error`. All 3 pass in the `response` object received from the server.
+
 ### v1.1.0
 
 __Important:__ Boilerplate version `1.5.6` or higher is required for the plugin to work as it uses new features. _Check your version before updating!_
