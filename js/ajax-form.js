@@ -56,6 +56,10 @@ $(document).ready(function() {
 
                 // Positive response
                 if ( response.code == 200 ) {
+                    
+                    // Event: contact.success
+                    $(document).trigger('contact.success', [response]);
+                    
                     $(formID)[0].reset();
 
                     if (formPush && formPush !== 'this') {
@@ -65,6 +69,9 @@ $(document).ready(function() {
                             window.location.reload();
                         }, 1000);
                     }
+                } else {
+                    // Event: contact.fail
+                    $(document).trigger('contact.fail', [response]);
                 }
 
                 // Response template
@@ -87,6 +94,9 @@ $(document).ready(function() {
                  */
 
                 console.log(response);
+                
+                // Event: contact.error
+                $(document).trigger('contact.error', [response]);
 
                 // Response template
                 var template = '<div class="cf-alert error">There was an error submitting the form. Please make sure you submit all required fields.</div>';
