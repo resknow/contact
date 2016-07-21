@@ -86,7 +86,7 @@ if ( in_array(get('page.path'), $_contact_post) ) {
         $gump = new GUMP();
         
         # Filter input
-        $data = Filters::apply('contact_input_' . $_index[1], form_data());
+        $data = apply_filters('contact/input/' . $_index[1], form_data());
 
         # Sanitize input
         $data = $gump->sanitize($data);
