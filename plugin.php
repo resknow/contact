@@ -145,6 +145,9 @@ if ( in_array(get('page.path'), $_contact_post) ) {
             require_once __DIR__ . '/inc/mail.php';
 
         }
+        
+        // Filter JSON response
+        $_contact_json = Filters::apply('contact_json', $_contact_json);
 
         header('Content-type: application/json');
         echo json_encode($_contact_json);
