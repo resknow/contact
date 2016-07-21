@@ -84,9 +84,12 @@ if ( in_array(get('page.path'), $_contact_post) ) {
 
         # Create GUMP object
         $gump = new GUMP();
+        
+        # Filter input
+        $data = Filters::apply('contact_input_' . $_index[1], form_data());
 
         # Sanitize input
-        $data = $gump->sanitize(form_data());
+        $data = $gump->sanitize($data);
 
         # Get Config for this Form
         $_current_form = $_contact_forms[$_index[1]];
